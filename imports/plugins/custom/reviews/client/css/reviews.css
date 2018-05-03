@@ -6,6 +6,33 @@
   width: 100%;
 }
 
+.review-field {
+  min-height: 100px;
+  min-width: 250px;
+}
+
+.review-button {
+  border: 1px solid #5cde86;
+  background-color: #5cde86;
+  flex: 1 1 auto;
+  border-radius: 0 2px 2px 0;
+  -webkit-box-flex: 1;
+  font-size: 16px;
+  color: #FFF;
+  padding: 6px 12px;
+}
+
+.review-button:hover {
+  border: 1px solid #248232;
+  background-color: #248232;
+  flex: 1 1 auto;
+  border-radius: 0 2px 2px 0;
+  -webkit-box-flex: 1;
+  font-size: 16px;
+  color: #FFF;
+  padding: 6px 12px;
+}
+
 .twenty-top-padding {
   padding-top: 20px;
 }

@@ -1,30 +1,10 @@
 import React, { Component } from 'react';
+import { Reaction } from "/client/api";
 import '../css/reviews.css';
 
 export default class Reviews extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      review: '',
-      reviewer: '',
-      rating: ''
-    }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleReviewChange = this.handleReviewChange.bind(this);
-  }
-
-  handleChange(e) {
-    console.log(e.target.value, 'value')
-    this.setState({
-      rating: e.target.value
-    });
-  }
-
-  handleReviewChange(e) {
-    this.setState({
-      review: e.target.value
-    });
   }
 
   render() {
@@ -38,15 +18,15 @@ export default class Reviews extends Component {
           <hr />
         </div>
         <div className="star-group">
-          <form action="">
+          <form action="" onSubmit={this.props.handleSubmit}>
             <input
               className="star star-5"
               id="star-5"
               type="radio"
               name="star"
               value="5"
-              checked={this.state.rating === "5"}
-              onChange={this.handleChange}
+              checked={this.props.rating === "5"}
+              onChange={this.props.handleRatingChange}
             />
             <label className="star star-5" htmlFor="star-5" />
 
@@ -56,8 +36,8 @@ export default class Reviews extends Component {
               type="radio"
               name="star"
               value="4"
-              checked={this.state.rating === "4"}
-              onChange={this.handleChange}
+              checked={this.props.rating === "4"}
+              onChange={this.props.handleRatingChange}
             />
             <label className="star star-4" htmlFor="star-4" />
 
@@ -67,8 +47,8 @@ export default class Reviews extends Component {
               type="radio"
               name="star"
               value="3"
-              checked={this.state.rating === "3"}
-              onChange={this.handleChange}
+              checked={this.props.rating === "3"}
+              onChange={this.props.handleRatingChange}
             />
             <label className="star star-3" htmlFor="star-3" />
 
@@ -78,8 +58,8 @@ export default class Reviews extends Component {
               type="radio"
               name="star"
               value="2"
-              checked={this.state.rating === "2"}
-              onChange={this.handleChange}
+              checked={this.props.rating.value === "2"}
+              onChange={this.props.handleRatingChange}
             />
             <label className="star star-2" htmlFor="star-2" />
 
@@ -89,19 +69,34 @@ export default class Reviews extends Component {
               type="radio"
               name="star"
               value="1"
-              checked={this.state.rating === "1"}
-              onChange={this.handleChange}
+              checked={this.props.rating === "1"}
+              onChange={this.props.handleRatingChange}
             />
             <label className="star star-1" htmlFor="star-1" />
 
             <div className="twenty-top-padding">
-              Review <br />
-              <input
-                name="review"
-                id="review"
-                value={this.state.review}
-                onChange={this.handleReviewChange}
-              />
+              <p>
+                Review <br />
+                <textarea
+                className="review-field"
+                  name="review"
+                  id="review"
+                  value={this.props.review}
+                  onChange={this.props.handleReviewChange}
+                />
+              </p>
+              <p>
+                Publish As:<br />
+                <input
+                  name="reviewer"
+                  id="reviewer"
+                  value={this.props.reviewer}
+                  onChange={this.props.handleReviewerChange}
+                />
+              </p>
+              <button className="btn review-button">
+                Add Review
+              </button>
             </div>
           </form>
         </div>
