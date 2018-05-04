@@ -80,6 +80,7 @@ class ReviewsContainer extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <ReviewsPresentational
@@ -108,6 +109,11 @@ function composer(props, onData) {
     const reviews = Reviews.find({}).fetch();
 
     onData(null, { reviews });
+  }
+  if (Meteor.subscribe("ReviewsAverage", revieweeId).ready()) {
+    const averageRating = Reviews.find({}).fetch();
+
+    onData(null, { averageRating });
   }
 }
 
