@@ -37,8 +37,16 @@
   padding-top: 20px;
 }
 
+.reviews-list {
+  list-style: none;
+}
+
+.list-item {
+  padding-bottom: 15px;
+}
+
 .star-group {
-  float: left;
+  align-items: center;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:500,100,300,700,400);
