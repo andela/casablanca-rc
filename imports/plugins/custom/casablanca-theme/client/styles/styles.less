@@ -1,0 +1,147 @@
+// Main colors;
+@casablanca-orange:  #F98D3F;
+@casablanca-blue: #256188;
+
+// The navbar
+.rui.navbar {
+  background-color: @casablanca-blue;
+}
+
+// The links in the navbar
+.rui.navbar {
+  .tag.link {
+    color: @white;
+  }
+  .brand {
+    color: @white;
+    font-weight: bold;
+  }
+}
+
+// [HOVER] The links in the navbar
+.rui.navbar a,
+.rui.navbar a:hover,
+.rui.navbar a:focus,
+.rui.navbar .dropdown-toggle:hover,
+.rui.navbar .dropdown-toggle:focus {
+  color: @black;
+}
+
+
+// The searh, notificaiton, language, currencies, accounts icon
+.rui.navbar {
+  .search .btn,
+  .notification-icon .btn,
+  .languages .btn div,
+  .currencies .btn div,
+  .accounts .btn div,
+  .accounts .dropdown-toggle {
+    color: @white !important; 
+  }
+  .cart-icon, .cart-icon .badge {
+     background-color: @casablanca-orange;
+     &:hover {
+      background-color: darken(@casablanca-orange, 5%);
+     }
+  }
+  .btn {
+    outline: none;
+  }
+}
+
+// [HOVER] The searh, notificaiton, language, currencies, accounts icon
+.rui.navbar {
+  .search,
+  .notification-icon,
+  .languages,
+  .currencies,
+  .accounts {
+    &:hover .btn.flat, &:hover .btn.flat div, &:hover .dropdown-toggle {
+      color: @black !important; 
+    }
+  }
+}
+
+// Admin Avater
+.rui-avatar.accounts-avatar div {
+  background-color: @casablanca-orange !important;
+}
+
+// The buttons in admin vertical toolbar
+.toolbar-vertical.admin-shortcut-bar .btn.flat {
+  color: @casablanca-blue;
+  outline: none;
+}
+
+// [ACTIVE] The buttons in admin vartical toolbar
+.admin-shortcut-bar nav .btn.active {
+  color: white !important;
+  background-color: @casablanca-blue;
+}
+
+// The admin dashboard side-drawer list
+.admin.dashboard-list .rui.list-group-item {
+  color: @casablanca-blue;
+}
+
+// Horizontal tool bar
+.navbar-inverse {
+  .btn.flat {
+    color: @casablanca-blue;
+    outline: none;
+  }
+  .btn.outline {
+    color: @casablanca-blue;
+    border-color: @casablanca-blue;
+    outline: none;
+  }
+}
+
+// [HOVER] The square buttons
+.btn-primary:hover {
+  background-color: @casablanca-blue !important;
+}
+
+// Active Switch
+.rui.switch .switch-control.active {
+  &:before {
+    background-color: #5fa5d3;
+  }
+  &:after {
+    background-color: #256188;
+  }
+}
+
+// Active Checkbox
+.checkbox-switch:checked:before {
+  background-color:#256188;
+}
+
+// Order filter options
+.order-filter-bar .order-filter-name.active,
+.order-filter-bar .order-filter-button.active {
+  color: @casablanca-blue;
+}
+
+// Add to cart button and input
+.pdp.add-to-cart {
+  input {
+    border: 1px solid lighten(@casablanca-orange, 25%);
+    background-color: @white;
+    color: @black;
+  }
+  button {
+    background-color: @casablanca-orange;
+    border: lighten(@casablanca-orange, 25%);
+    outline: none;
+  }
+  button:hover {
+    background-color: darken(@casablanca-orange, 5%);
+  }
+}
+
+.variant-detail-selected, .variant-detail-selected:hover {
+  border: #e6e6e6;
+  background-color: @white;
+  box-shadow: 0 0 0 1px #e6e6e6;
+}
