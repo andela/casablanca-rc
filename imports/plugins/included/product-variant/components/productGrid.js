@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Components } from "@reactioncommerce/reaction-components";
+import tourSetup from "../../onboarding/initTour";
 
 class ProductGrid extends Component {
   static propTypes = {
     products: PropTypes.array
+  }
+
+  componentDidMount() {
+    tourSetup.initAutoTour();
   }
 
   renderProductGridItems = (products) => {
