@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Components } from "@reactioncommerce/reaction-components";
 import { Meteor } from "meteor/meteor";
+import tourSetup from "../../../../included/onboarding/initTour";
 
 // TODO: Delete this, and do it the react way - Mike M.
 async function openSearchModalLegacy(props) {
@@ -25,6 +26,11 @@ class NavBar extends Component {
     hasProperPermission: PropTypes.bool,
     searchEnabled: PropTypes.bool,
     shop: PropTypes.object
+  }
+
+  constructor(props) {
+    super(props);
+    this.startTour = this.startTour.bind(this);
   }
 
   state = {
@@ -94,6 +100,18 @@ class NavBar extends Component {
     }
   }
 
+  renderOnboardingButton() {
+    if (this.props.hasProperPermission) {
+      return (
+        <div className="search">
+          <button onClick={this.startTour} className="rui btn btn-default flat button" type="button" kind="flat">
+            Take Tour
+          </button>
+        </div>
+      );
+    }
+  }
+
   renderCartContainerAndPanel() {
     return (
       <div className="cart-container">
@@ -132,6 +150,11 @@ class NavBar extends Component {
     );
   }
 
+  startTour(event) {
+    event.preventDefault();
+    tourSetup.initManualTour();
+  }
+
   render() {
     return (
       <div className="rui navbar">
@@ -139,6 +162,7 @@ class NavBar extends Component {
         {this.renderBrand()}
         {this.renderTagNav()}
         {this.renderSearchButton()}
+        {this.renderOnboardingButton()}
         {this.renderNotificationIcon()}
         {this.renderLanguage()}
         {this.renderCurrency()}
