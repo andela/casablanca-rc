@@ -11,7 +11,7 @@
     "Assets": true, // Meteor global
     "Package": true, // Meteor global
     "FS": true, // gridFS,
-    "Alerts": true,  // this needs to get cleaned up, but ignoring for now
+    "Alerts": true,
     "jest": true,
     "expect": true,
     "test": true,
