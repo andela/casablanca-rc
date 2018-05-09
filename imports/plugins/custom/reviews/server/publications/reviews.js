@@ -5,29 +5,13 @@ import { Reviews } from "../../lib/collections";
 Meteor.publish("Reviews", function (revieweeId) {
   check(revieweeId, String);
   if (Meteor.isServer) {
-    return Reviews.find({
-      revieweeId
-    });
-  }
-});
-
-Meteor.publish("ReviewsAverage", function (revieweeId) {
-  check(revieweeId, String);
-  if (Meteor.isServer) {
-    const result = Reviews.aggregate([
+    return Reviews.find(
       {
-        $match: {
-          revieweeId
-        }
+        revieweeId
       },
       {
-        $group: {
-          _id: "$revieweeId",
-          averageRating: { $avg: "$rating" }
-        }
+        sort: [["createdAt", "desc"]]
       }
-    ]);
-    console.log(result);
-    return result;
+    );
   }
 });

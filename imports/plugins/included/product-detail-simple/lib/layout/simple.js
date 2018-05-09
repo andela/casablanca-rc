@@ -27,6 +27,9 @@ export default function blocks() {
             }
           }
         },
+        {
+          component: "ShopLink"
+        },
 
         // PageTitle
         {

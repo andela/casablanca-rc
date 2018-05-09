@@ -17,6 +17,10 @@ export const Review = new SimpleSchema({
   revieweeId: {
     type: String,
     optional: false
+  },
+  createdAt: {
+    type: Date,
+    optional: false
   }
 });
 

@@ -8,10 +8,25 @@
 
 .review-field {
   min-height: 100px;
-  min-width: 250px;
+  /* min-width: 250px; */
+  max-width: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
+  width: 318px;
 }
 
 .review-button {
+  border: 1px solid #5cde86;
+  background-color: #5cde86;
+  flex: 1 1 auto;
+  border-radius: 0 2px 2px 0;
+  -webkit-box-flex: 1;
+  font-size: 16px;
+  color: #FFF;
+  padding: 6px 12px;
+}
+
+.review-button:visited, .review-button:active, .review-button:link {
   border: 1px solid #5cde86;
   background-color: #5cde86;
   flex: 1 1 auto;
@@ -31,6 +46,46 @@
   font-size: 16px;
   color: #FFF;
   padding: 6px 12px;
+}
+
+.modal-padding {
+  width: 45%;
+  margin: auto;
+}
+
+.modal-padding-bottom {
+  padding-bottom: 30px;
+}
+
+.review-modal-button {
+  width: 50%;
+  margin: auto;
+}
+
+.modal-heading {
+  text-align: center;
+  color: black;
+}
+
+#reviewer-details {
+  font-weight: bold;
+  padding-top: 10px;
+}
+
+.reviews-heading {
+  text-align: center;
+}
+
+.wrap-review-button {
+  width: 50%;
+  margin: auto;
+}
+
+#no-reviews {
+  padding-top: 40px;
+  font-size: 30px;
+  width: 50%;
+  margin: auto;
 }
 
 .twenty-top-padding {
@@ -63,7 +118,7 @@ input.star{
 label.star {
   float: right;
   padding: 5px;
-  font-size: 36px;
+  font-size: 25px;
   color: #444;
   transition: all .2s;
 }

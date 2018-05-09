@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import ReactStars from "react-stars";
-import "../css/reviews.css";
+import "../../../reviews/client/css/reviews.css";
 
-export default class Reviews extends Component {
+class ShopReviewsPresentational extends Component {
   constructor(props) {
     super(props);
   }
@@ -10,30 +10,23 @@ export default class Reviews extends Component {
   render() {
     return (
       <div>
-        <div className="padding-thirty stars" id="width-hundred">
-          <div className="rui separator divider labeled">
-            <hr />
-            <span className="label">
-              <span>Reviews</span>
-            </span>
-            <hr />
-          </div>
-          <div>Average rating: <ReactStars edit={false} value={this.props.averageRating}/></div>
-        </div>
         {this.props.currentUser.name !== undefined ? (
           <div>
-            <button
-              type="button"
-              className="review-button"
-              data-toggle="modal"
-              data-target="#reviewModal"
-            >Add Review</button>
+            <div className="wrap-review-button">
+              <button
+                type="button"
+                className="review-button"
+                data-toggle="modal"
+                data-target="#shopReviewsModal"
+              >Add Review</button>
+            </div>
+
             <div
               className="modal fade"
-              id="reviewModal"
+              id="shopReviewsModal"
               tabIndex="-1"
               role="dialog"
-              aria-labelledby="exampleModalLabel"
+              aria-labelledby="shopReviewsModalLabel"
               aria-hidden="true"
             >
               <div className="modal-dialog">
@@ -51,7 +44,7 @@ export default class Reviews extends Component {
 
                         <div className="twenty-top-padding">
                           <p>
-                            Drop review {`for ${this.props.productName}: `} <br /> <br />
+                            Drop review {`for ${this.props.shopName}: `} <br /> <br />
                             <textarea
                               className="review-field"
                               name="review"
@@ -78,3 +71,4 @@ export default class Reviews extends Component {
     );
   }
 }
+export default ShopReviewsPresentational;

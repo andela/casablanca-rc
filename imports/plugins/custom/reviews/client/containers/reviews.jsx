@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Meteor } from "meteor/meteor";
 import { registerComponent, composeWithTracker } from "@reactioncommerce/reaction-components";
 import { Reaction } from "/client/api";
+import { Session } from "meteor/session";
 import { ReviewsPresentational } from "../components";
 import { ReviewsList } from "../components";
 import "../css/reviews.css";
@@ -13,7 +14,9 @@ class ReviewsContainer extends Component {
 
     this.state = {
       review: "",
-      rating: ""
+      rating: "",
+      products: [],
+      product: {}
     };
 
     this.currentUser = Meteor.user();
@@ -22,9 +25,26 @@ class ReviewsContainer extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    const self = this;
+    const revieweeId = Reaction.Router.getParam("handle");
+    Meteor.call("reviews/average", revieweeId, function (err, data) {
+      if (!err) {
+        Session.set("averageRating", data);
+      }
+    });
+    Meteor.call("review/product", revieweeId, function (err, data) {
+      if (!err) {
+        self.setState({
+          product: data
+        });
+      }
+    });
+  }
+
   handleRatingChange(e) {
     this.setState({
-      rating: e.target.value
+      rating: e
     });
   }
 
@@ -43,6 +63,11 @@ class ReviewsContainer extends Component {
     const reviewer = this.currentUser.name;
     const revieweeId = Reaction.Router.getParam("handle");
     Meteor.call("review/create", review, reviewer, rating, revieweeId);
+    Meteor.call("reviews/average", revieweeId, function (err, data) {
+      if (!err) {
+        Session.set("averageRating", data);
+      }
+    });
     this.clearFields();
     $("#reviewModal").modal("hide");
   }
@@ -50,27 +75,26 @@ class ReviewsContainer extends Component {
   clearFields() {
     this.setState({
       rating: "",
-      review: "",
-      reviewer: ""
+      review: ""
     });
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <ReviewsPresentational
           review={this.state.review}
           currentUser={this.currentUser}
           revieweeId={this.state.revieweeId}
-          rating={this.state.rating}
+          rating={parseInt(this.state.rating, 10)}
           handleSubmit={this.handleSubmit}
           handleRatingChange={this.handleRatingChange}
           handleReviewChange={this.handleReviewChange}
-          handleReviewerChange={this.handleReviewerChange}
+          averageRating={Session.get("averageRating")}
+          productName={this.state.product.title}
         />
         <div>
-          <h1 className="padding-twenty">All reviews</h1>
+          <h1 className="padding-twenty reviews-heading">All reviews</h1>
           <ReviewsList reviews={this.props.reviews}/>
         </div>
       </div>
@@ -84,11 +108,6 @@ function composer(props, onData) {
     const reviews = Reviews.find({}).fetch();
 
     onData(null, { reviews });
-  }
-  if (Meteor.subscribe("ReviewsAverage", revieweeId).ready()) {
-    const averageRating = Reviews.find({}).fetch();
-
-    onData(null, { averageRating });
   }
 }
 

@@ -1,10 +1,10 @@
 import { Meteor } from "meteor/meteor";
 import { check } from "meteor/check";
-import { Reviews } from "../../lib/collections";
-import { Products } from "../../../../../../lib/collections";
+import { Reviews } from "../../../reviews/lib/collections";
+import { Products, Shops } from "../../../../../../lib/collections";
 
 Meteor.methods({
-  "review/create"(review, reviewer, rating, revieweeId) {
+  "shopReviews/create"(review, reviewer, rating, revieweeId) {
     check(review, String);
     check(reviewer, String);
     check(rating, Number);
@@ -18,7 +18,7 @@ Meteor.methods({
       createdAt: new Date()
     });
   },
-  "reviews/average"(revieweeId) {
+  "shopReviews/average"(revieweeId) {
     check(revieweeId, String);
     const result = Reviews.aggregate([
       {
@@ -35,8 +35,14 @@ Meteor.methods({
     ]);
     return result[0].averageRating;
   },
-  "review/product"(productId) {
+  "product/shop"(productId) {
     check(productId, String);
-    return Products.findOne({ handle: productId });
+    const result = Products.findOne({ handle: productId });
+    return result.shopId;
+  },
+  "shop/details"(shopId) {
+    check(shopId, String);
+    const result = Shops.findOne({ _id: shopId });
+    return result;
   }
 });

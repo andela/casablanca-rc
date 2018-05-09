@@ -3,7 +3,8 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Components, registerComponent, composeWithTracker } from "@reactioncommerce/reaction-components";
 import { compose } from "recompose";
 import ReactStars from "react-stars";
-import '../css/reviews.css';
+import moment from "moment";
+import "../css/reviews.css";
 
 export default class ReviewsList extends Component {
   constructor(props) {
@@ -11,14 +12,21 @@ export default class ReviewsList extends Component {
   }
 
   render() {
+    if (!this.props.reviews || (this.props.reviews && this.props.reviews.length === 0)) {
+      return (
+        <div id="no-reviews">No reviews found</div>
+      );
+    }
     const listItems = this.props.reviews.map(review =>
       <li key={review._id} className="list-item">
         <div className="row">
-          <div className="col-md-4 col-xs-12 col-lg-4 col-sm-12">
-            <span><ReactStars value={review.rating} edit={false}/></span> {review.reviewer}
-          </div>
-          <div className="col-md-8 col-xs-12 col-lg-8 col-sm-12">
-            {review.review}
+          <div className="rui separator divider">
+            <div>
+              <span><ReactStars value={review.rating} edit={false}/></span> <br />
+              {review.review} <br />
+              <p id="reviewer-details"> By {review.reviewer} on {moment(review.createdAt).format("LL")}</p>
+            </div>
+            <hr />
           </div>
         </div>
       </li>
