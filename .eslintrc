@@ -8,7 +8,7 @@
   },
   "globals": {
     "browser": true,
-    "Assets": true, // Meteor global
+    "Assets": true,
     "Package": true, // Meteor global
     "FS": true, // gridFS,
     "Alerts": true,
