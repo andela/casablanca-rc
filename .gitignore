@@ -39,6 +39,7 @@ public/custom/*
 
 private/custom/*
 !private/custom/.gitkeep
+!private/custom/payment-paystack
 
 
 .reaction/config.json

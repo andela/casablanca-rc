@@ -1,5 +1,5 @@
 {
-  "parser": "babel-eslint", // now for the support of allowImportExportEverywhere
+  "parser": "babel-eslint",
   "env": {
     "browser": true,
     "node": true,
@@ -8,13 +8,14 @@
   },
   "globals": {
     "browser": true,
-    "Assets": true, // Meteor global
+    "Assets": true,
     "Package": true, // Meteor global
     "FS": true, // gridFS,
-    "Alerts": true,  // this needs to get cleaned up, but ignoring for now
+    "Alerts": true,
     "jest": true,
     "expect": true,
-    "test": true
+    "test": true,
+    "PaystackPop": true
   },
   "parserOptions": {
      "ecmaVersion": 6,
