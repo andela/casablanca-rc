@@ -37,3 +37,10 @@
   text-decoration: underline;
   font-size: 20px;
 }
+
+.shop-name {
+  font-size: 30px;
+  text-align: center;
+  padding: 10px 0px;
+  text-decoration: underline;
+}
