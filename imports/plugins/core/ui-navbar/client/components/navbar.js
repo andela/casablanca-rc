@@ -174,6 +174,7 @@ class NavBar extends Component {
   }
 
   render() {
+    // console.log(this.props, 'no props here ')
     return (
       <div className="rui navbar">
         {this.renderHamburgerButton()}

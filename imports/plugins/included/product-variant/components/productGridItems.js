@@ -53,11 +53,11 @@ class ProductGridItems extends Component {
   renderMedia() {
     if (this.props.media() === false) {
       return (
-        <span className="product-image" style={{ backgroundImage: "url('/resources/placeholder.gif')" }} />
+        <span className="product-image hvr-bounce-in" style={{ backgroundImage: "url('/resources/placeholder.gif')" }} />
       );
     }
     return (
-      <span className="product-image" style={{ backgroundImage: `url('${this.props.media().url({ store: "large" })}')` }}/>
+      <span className="product-image hvr-bounce-in" style={{ backgroundImage: `url('${this.props.media().url({ store: "large" })}')` }}/>
     );
   }
 
@@ -67,7 +67,7 @@ class ProductGridItems extends Component {
         return (
           <div className={`product-additional-images ${this.renderVisible()}`}>
             {this.props.additionalMedia().map((media) => {
-              return <span key={media._id} className="product-image" style={{ backgroundImage: `url('${media.url({ store: "medium" })}')` }} />;
+              return <span key={media._id} className="product-image hvr-bounce-in" style={{ backgroundImage: `url('${media.url({ store: "medium" })}')` }} />;
             })}
             {this.renderOverlay()}
           </div>
@@ -124,6 +124,18 @@ class ProductGridItems extends Component {
         <div className={this.renderHoverClassName()}>
           <span className="product-grid-item-alerts" />
 
+          <div className="center">
+            <button type="button"
+              className=" btn add_to_cart"
+              href={this.props.pdpPath()}
+              data-event-category="grid"
+              data-event-label="grid product click"
+              data-event-value={this.props.product._id}
+              onDoubleClick={this.handleDoubleClick}
+              onClick={this.handleClick}
+            >
+              <i className="fa fa-shopping-cart" /> ADD TO CART</button>
+          </div>
           <a className="product-grid-item-images"
             href={this.props.pdpPath()}
             data-event-category="grid"

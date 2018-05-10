@@ -1,0 +1,134 @@
+<template name="carousel">
+<div class="slider-height">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" >
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+    
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <img class="d-block w-100 img-responsive fit-image" src="resources/images/adult-beautiful-clothes-291762.jpg" alt="...">
+            <div class="mask rgba-black-light"></div>
+            <div class="carousel-caption">
+              {{#each tag in tags}}
+              <button class="h3-responsive fit-button truncate btn-md">
+                <a href="tag/{{tag.name}}" title="{{tag.name}}">{{tag.name}}</a>
+              </button>
+              {{/each}}
+              <h1>Up to
+                <span class="discount">45%</span> off</h1>
+            </div>
+          </div>
+          <div class="item">
+            <img class="d-block w-100 img-responsive fit-image"  src="resources/images/classic-clothes-commerce-298863.jpg"
+              alt="...">
+            <div class="mask rgba-black-strong"></div>
+            <div class="carousel-caption">
+              {{#each tag in tags}}
+              <button class="h3-responsive fit-button truncate">
+                <a href="tag/{{tag.name}}" title="{{tag.name}}">{{tag.name}}</a>
+              </button>
+              {{/each}}
+              <h1>Up to
+                <span class="discount">45%</span> off</h1>
+            </div>
+          </div>
+          <div class="item">
+            <img class="d-block w-100 img-responsive fit-image" src="resources/images/business-communication-computer-265127.jpg"
+              alt="...">
+            <div class="mask rgba-black-strong"></div>
+            <div class="carousel-caption">
+              {{#each tag in tags}}
+              <button class="h3-responsive fit-button truncate">
+                <a href="tag/{{tag.name}}" title="{{tag.name}}">{{tag.name}}</a>
+              </button>
+              {{/each}}
+              <h1>Up to
+                <span class="discount">45%</span> off</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+ 
+  <div>
+    <h3 class="cta">Buy now, be stylish all season</h3>
+  </div>
+  <div class="container ">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <div class="long text-center">
+          <img class="img-responsive img-rounded" src="resources/images/neonbrand-543627-unsplash.jpg" alt="Third slide">
+          <p class="bg-color">
+            <a class="btn-transparent" href="/tag/bags">Bags</a>
+            <span class="fa fa-chevron-right greater-than" aria-hidden="true"></span>
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <div class="long text-center">
+          <img class="img-responsive img-rounded" src="resources/images/apple-apple-devices-clean-205316.jpg" alt="Third slide">
+          <p class="bg-color">
+            <a class="btn-transparent" href="/tag/computers">Computers</a>
+            <span class="fa fa-chevron-right greater-than" aria-hidden="true"></span>
+          </p>
+        </div>
+
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <div class="long text-center">
+          <img class="img-responsive img-rounded" src="resources/images/blur-close-up-elegant-298852.jpg" alt="Third slide">
+          <p class="bg-color">
+            <a class="btn-transparent" href="/tag/phones">Phones</a>
+            <span class="fa fa-chevron-right greater-than" aria-hidden="true"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="jumbotron">
+        <p>
+          <a class="btn btn-primary btn-lg" href="#" role="button">MUST-HAVE SHOES</a>
+        </p>
+        <p>
+          <a class="btn btn-primary btn-lg" href="#" role="button">MEN</a>
+        </p>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <div class="long text-center">
+          <img class="img-responsive img-rounded" src="resources/images/pexels-photo-125779.jpeg" alt="Third slide">
+          <p class="bg-color">
+            <a class="btn-transparent" href="tag/watches">Watches</a>
+            <span class="fa fa-chevron-right greater-than" aria-hidden="true"></span>
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <div class="long text-center">
+          <img class="img-responsive img-rounded" src="resources/images/bag-boutique-business-336372.jpg" alt="Third slide">
+          <p class="bg-color">
+            <a class="btn-transparent" href="tag/shoes">Shoes</a>
+            <span class="fa fa-chevron-right greater-than" aria-hidden="true"></span>
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <div class="long text-center">
+          <img class="img-responsive img-rounded" src="resources/images/IPhones.jpeg" alt="Third slide">
+          <p class="bg-color">
+            <a class="btn-transparent" href="/tag/phones">Phones</a>
+            <span class="fa fa-chevron-right greater-than" aria-hidden="true"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
