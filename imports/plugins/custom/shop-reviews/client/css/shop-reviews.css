@@ -1,0 +1,39 @@
+.shop-heading {
+  text-align: center;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.shop-reviews-heading {
+  padding-top: 20px;
+  width: 50%;
+  margin: auto;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.shop-average-rating {
+  padding-top: 5px;
+  width: 50%;
+  margin: auto;
+}
+
+.ten-padding {
+  padding-top: 10px;
+}
+
+.reviews-divider {
+  border-top-width: 4px;
+}
+
+#no-reviews {
+  padding-top: 40px;
+  font-size: 30px;
+  width: 50%;
+  margin: auto;
+}
+
+.shop-link {
+  text-decoration: underline;
+  font-size: 20px;
+}

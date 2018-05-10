@@ -27,6 +27,9 @@ export default function blocks() {
             }
           }
         },
+        {
+          component: "ShopLink"
+        },
 
         // PageTitle
         {
@@ -187,6 +190,16 @@ export default function blocks() {
           props: {
             style: {
               paddingTop: 20
+            }
+          }
+        },
+
+        // Reviews
+        {
+          component: "Reviews",
+          props: {
+            style: {
+              paddingTop: 50
             }
           }
         }
