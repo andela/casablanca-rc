@@ -78,6 +78,7 @@ const addToWallet = (amount) => {
   Meteor.call("accounts/addToWallet", amount);
 };
 
+<<<<<<< HEAD
 const addToFriendWallet = (amount, email) => {
   const template = Template.instance();
   const amountInput = template.$("#transfer-amount");
@@ -95,6 +96,8 @@ const addToFriendWallet = (amount, email) => {
   });
 };
 
+=======
+>>>>>>> feat(wallet): implement digital wallet
 Template.walletPanel.events({
   "click #fundButton"() {
     const template = Template.instance();
@@ -111,6 +114,7 @@ Template.walletPanel.events({
         Alerts.toast(error.message, "error");
       });
     }
+<<<<<<< HEAD
   },
   "click #addToFriendWalletButton"() {
     const template = Template.instance();
@@ -132,5 +136,7 @@ Template.walletPanel.events({
         addToFriendWallet(parseInt(amount, 10), email);
       }
     }
+=======
+>>>>>>> feat(wallet): implement digital wallet
   }
 });
