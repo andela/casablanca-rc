@@ -1085,6 +1085,31 @@ export const deductFromWallet = (amount) => {
   return true;
 };
 
+export const addToFriendWallet = (amount, email) => {
+  check(amount, validAmountCheck);
+  check(email, String);
+  const user = Meteor.user();
+  const recipient = Accounts.findOne({ emails: { $elemMatch: { address: email } } });
+  if (recipient === undefined) {
+    return false;
+  }
+  Accounts.update({
+    emails: { $elemMatch: { address: email } }
+  }, {
+    $inc: {
+      walletBalance: amount
+    }
+  });
+  Accounts.update({
+    _id: user._id
+  }, {
+    $inc: {
+      walletBalance: -1 * amount
+    }
+  });
+  return true;
+};
+
 /* All about Wallet */
 
 
@@ -1106,5 +1131,6 @@ Meteor.methods({
   "accounts/removeEmailAddress": removeEmailAddress,
   "accounts/addToWallet": addToWallet,
   "accounts/deductFromWallet": deductFromWallet,
-  "accounts/getWalletBalance": getWalletBalance
+  "accounts/getWalletBalance": getWalletBalance,
+  "accounts/addToFriendWallet": addToFriendWallet
 });

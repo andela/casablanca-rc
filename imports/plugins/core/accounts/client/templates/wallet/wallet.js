@@ -78,6 +78,23 @@ const addToWallet = (amount) => {
   Meteor.call("accounts/addToWallet", amount);
 };
 
+const addToFriendWallet = (amount, email) => {
+  const template = Template.instance();
+  const amountInput = template.$("#transfer-amount");
+  const recipientEmail = template.$("#transfer-email");
+  Meteor.call("accounts/addToFriendWallet", amount, email, function (err, data) {
+    if (!err) {
+      if (!data) {
+        Alerts.toast("Email is invalid. Please try again", "error");
+      } else {
+        Alerts.toast(`Successful transfer of ${amount} to ${email}`);
+        amountInput.val("");
+        recipientEmail.val("");
+      }
+    }
+  });
+};
+
 Template.walletPanel.events({
   "click #fundButton"() {
     const template = Template.instance();
@@ -93,6 +110,27 @@ Template.walletPanel.events({
       }).catch((error) => {
         Alerts.toast(error.message, "error");
       });
+    }
+  },
+  "click #addToFriendWalletButton"() {
+    const template = Template.instance();
+    const amountInput = template.$("#transfer-amount");
+    const recipientEmail = template.$("#transfer-email");
+    const amount = amountInput.val();
+    const email = recipientEmail.val();
+    if (!amount || isNaN(amount) || parseInt(amount, 10) < 0) {
+      Alerts.toast("Top-up amount has to be a valid number", "error");
+    } else if (Reaction.Subscriptions && Reaction.Subscriptions.Account && Reaction.Subscriptions.Account.ready()) {
+      const account = getTargetAccount();
+      let balance = 0;
+      if (account) {
+        balance = account.walletBalance;
+      }
+      if (balance < amount) {
+        Alerts.toast("You have insufficient funds", "error");
+      } else {
+        addToFriendWallet(parseInt(amount, 10), email);
+      }
     }
   }
 });
