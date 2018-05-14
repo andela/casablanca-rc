@@ -48,14 +48,14 @@ const steps = [
       You can change the default language as required here.
     </div>`
   },
-  {
-    element: ".brand",
-    intro: `<h2>Our shop</h2>
-    <hr>
-    <div class="tourcontainer">
-      This 
-    </div>`
-  },
+  // {
+  //   element: ".brand",
+  //   intro: `<h2>Our shop</h2>
+  //   <hr>
+  //   <div class="tourcontainer">
+  //     This
+  //   </div>`
+  // },
   {
     element: "#tour-button",
     intro: `<h2>Tour</h2>

@@ -181,7 +181,6 @@ class NavBar extends Component {
         {this.renderBrand()}
         {this.renderTagNav()}
         {this.renderSearchButton()}
-        {this.renderOnboardingButton()}
         {this.renderTourButton()}
         {this.renderNotificationIcon()}
         {this.renderOnboardingButton()}
