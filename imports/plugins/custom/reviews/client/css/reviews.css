@@ -16,8 +16,8 @@
 }
 
 .review-button {
-  border: 1px solid #5cde86;
-  background-color: #5cde86;
+  border: 1px solid #f98d3f;
+  background-color: #f98d3f;
   flex: 1 1 auto;
   border-radius: 0 2px 2px 0;
   -webkit-box-flex: 1;
@@ -27,8 +27,8 @@
 }
 
 .review-button:visited, .review-button:active, .review-button:link {
-  border: 1px solid #5cde86;
-  background-color: #5cde86;
+  border: 1px solid #f98d3f;
+  background-color: #f98d3f;
   flex: 1 1 auto;
   border-radius: 0 2px 2px 0;
   -webkit-box-flex: 1;
@@ -38,8 +38,8 @@
 }
 
 .review-button:hover {
-  border: 1px solid #248232;
-  background-color: #248232;
+  border: 1px solid #f98c3e;
+  background-color: #f98c3e;
   flex: 1 1 auto;
   border-radius: 0 2px 2px 0;
   -webkit-box-flex: 1;

@@ -1019,6 +1019,100 @@ export function createFallbackLoginToken() {
   }
 }
 
+/* All about Wallet */
+
+/**
+ * @summary Ensures that the amount to be added/deducted from the wallet is of the right type.
+ * @returns boolean
+ */
+const validAmountCheck = Match.Where((amount) => {
+  check(amount, Match.Integer);
+  return amount > 0;
+});
+
+
+/**
+ * @name accounts/getWalletBalance
+ * @memberof Methods/Accounts
+ * @method
+ * @summary Get the balance in the wallet.
+ * @returns {Number} - returns the blance.
+ */
+export const getWalletBalance = () => {
+  const user = Meteor.user();
+  const account = Accounts.findOne({ _id: user._id });
+  const balance = account.walletBalance;
+  return balance;
+};
+
+/**
+ * @name accounts/addToWallet
+ * @memberof Methods/Accounts
+ * @method
+ * @summary Adds more fund to the wallet.
+ * @returns {Boolean} - returns boolean.
+ */
+export const addToWallet = (amount) => {
+  check(amount, validAmountCheck);
+  const user = Meteor.user();
+  Accounts.update({
+    _id: user._id
+  }, {
+    $inc: {
+      walletBalance: amount
+    }
+  });
+  return true;
+};
+
+/**
+ * @name accounts/deductFromWallet
+ * @memberof Methods/Accounts
+ * @method
+ * @summary Deducts fund from the wallet.
+ * @returns {Boolean} - returns boolean.
+ */
+export const deductFromWallet = (amount) => {
+  check(amount, validAmountCheck);
+  const user = Meteor.user();
+  Accounts.update({
+    _id: user._id
+  }, {
+    $inc: {
+      walletBalance: -1 * amount
+    }
+  });
+  return true;
+};
+
+export const addToFriendWallet = (amount, email) => {
+  check(amount, validAmountCheck);
+  check(email, String);
+  const user = Meteor.user();
+  const recipient = Accounts.findOne({ emails: { $elemMatch: { address: email } } });
+  if (recipient === undefined) {
+    return false;
+  }
+  Accounts.update({
+    emails: { $elemMatch: { address: email } }
+  }, {
+    $inc: {
+      walletBalance: amount
+    }
+  });
+  Accounts.update({
+    _id: user._id
+  }, {
+    $inc: {
+      walletBalance: -1 * amount
+    }
+  });
+  return true;
+};
+
+/* All about Wallet */
+
+
 Meteor.methods({
   "accounts/verifyAccount": verifyAccount,
   "accounts/validateAddress": validateAddress,
@@ -1034,5 +1128,9 @@ Meteor.methods({
   "accounts/setUserPermissions": setUserPermissions,
   "accounts/createFallbackLoginToken": createFallbackLoginToken,
   "accounts/updateEmailAddress": updateEmailAddress,
-  "accounts/removeEmailAddress": removeEmailAddress
+  "accounts/removeEmailAddress": removeEmailAddress,
+  "accounts/addToWallet": addToWallet,
+  "accounts/deductFromWallet": deductFromWallet,
+  "accounts/getWalletBalance": getWalletBalance,
+  "accounts/addToFriendWallet": addToFriendWallet
 });

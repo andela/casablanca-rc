@@ -76,7 +76,10 @@ class ShopReviewsContainer extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-lg-9 col-md-9 col-sm-12 col-md-12"><Components.Products products={this.props.products}/></div>
+        <div className="col-lg-9 col-md-9 col-sm-12 col-md-12">
+          <div className="shop-name">{this.state.shop.name}</div>
+          <Components.Products products={this.props.products}/>
+        </div>
         <div className="col-lg-3 col-md-3 col-sm-12 col-md-12">
           <div className="shop-reviews-heading">
             All reviews <br />

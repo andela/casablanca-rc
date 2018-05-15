@@ -15,3 +15,24 @@ Meteor.publish("Reviews", function (revieweeId) {
     );
   }
 });
+
+Meteor.publish("ReviewsAverage", function (revieweeId) {
+  check(revieweeId, String);
+  if (Meteor.isServer) {
+    const result = Reviews.aggregate([
+      {
+        $match: {
+          revieweeId
+        }
+      },
+      {
+        $group: {
+          _id: "$revieweeId",
+          averageRating: { $avg: "$rating" }
+        }
+      }
+    ]);
+    console.log(result);
+    return result;
+  }
+});
