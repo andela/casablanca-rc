@@ -1025,10 +1025,7 @@ export function createFallbackLoginToken() {
  * @summary Ensures that the amount to be added/deducted from the wallet is of the right type.
  * @returns boolean
  */
-const validAmountCheck = Match.Where((amount) => {
-  check(amount, Match.Integer);
-  return amount > 0;
-});
+const validAmountCheck = Match.Where((amount) => !isNaN(amount) && amount > 0);
 
 
 /**
@@ -1075,11 +1072,14 @@ export const addToWallet = (amount) => {
 export const deductFromWallet = (amount) => {
   check(amount, validAmountCheck);
   const user = Meteor.user();
+  const currentAccount = Accounts.findOne({ _id: user._id });
+  const walletBalance = currentAccount.walletBalance;
+  const newBalance = walletBalance - amount;
   Accounts.update({
     _id: user._id
   }, {
-    $inc: {
-      walletBalance: -1 * amount
+    $set: {
+      walletBalance: newBalance
     }
   });
   return true;
