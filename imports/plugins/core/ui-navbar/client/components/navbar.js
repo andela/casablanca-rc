@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Reaction } from "/client/api";
 import { Components } from "@reactioncommerce/reaction-components";
 import { Meteor } from "meteor/meteor";
 import tourSetup from "../../../../included/onboarding/initTour";
@@ -11,7 +12,6 @@ async function openSearchModalLegacy(props) {
     const { Blaze } = await import("meteor/blaze");
     const { Template } = await import("meteor/templating");
     const { $ } = await import("meteor/jquery");
-
     const searchTemplate = Template[props.searchTemplate];
 
     Blaze.renderWithData(searchTemplate, {}, $("html").get(0));
@@ -95,7 +95,7 @@ class NavBar extends Component {
   }
 
   renderOnboardingButton() {
-    if (!this.props.hasProperPermission) {
+    if (!Reaction.hasPermission("admin")) {
       return (
         <div className="search">
           <button onClick={this.startOnboarding} className="rui btn btn-default flat button" type="button" kind="flat">
@@ -119,7 +119,7 @@ class NavBar extends Component {
   }
 
   renderTourButton() {
-    if (this.props.hasProperPermission) {
+    if (Reaction.hasPermission("admin") && window.location.pathname !== "/") {
       return (
         <div className="search">
           <button onClick={this.startTour} className="rui btn btn-default flat button" type="button" kind="flat">

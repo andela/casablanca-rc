@@ -14,7 +14,7 @@ const VendorTourGuide = [
     element: ".toolbar-vertical",
     intro: `<h3>Vendor Dashboard</h3>
       <hr>
-      <div>This is were you manage your store, keep up with orders, choose your preferred payment methods</div>`
+      <div>This is where you manage your store, keep up with orders, choose your preferred payment methods</div>`
   },
   {
     element: ".cart-container",
