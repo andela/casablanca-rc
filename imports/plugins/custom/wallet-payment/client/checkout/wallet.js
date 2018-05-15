@@ -16,17 +16,6 @@ const deductFromWallet = (amount) => {
   Meteor.call("accounts/deductFromWallet", amount);
 };
 
-/**
- * @method getWalletBalance
- * @summary Get the balane in the wallet of a user.
- * @returns {Number} The balance in the wallet.
- */
-const getWalletBalance = () => {
-  Meteor.call("accounts/getWalletBalance", (error, result) => {
-    return result;
-  });
-};
-
 Template.walletPaymentForm.helpers({
   totalPrice() {
     return Cart.findOne().getTotal();
@@ -35,8 +24,7 @@ Template.walletPaymentForm.helpers({
 
 Template.walletPaymentForm.events({
   "click #submitWalletPayment"() {
-    const walletBalane = getWalletBalance();
-    const amount = parseFloat(Cart.findOne().getTotal());
+    const amount = Math.round(Cart.findOne().getTotal());
     const currency = Shops.findOne().currency;
 
     Meteor.subscribe("Packages", Reaction.getShopId());
@@ -44,31 +32,32 @@ Template.walletPaymentForm.events({
       name: "example-paymentmethod",
       shopId: Reaction.getShopId()
     });
-
-    if (amount > walletBalane) {
-      Alerts.alert("You do not have enough money to purchase this product.");
-    } else {
-      // Make the payment
-      const paymentMethod = {
-        processor: "Wallet",
-        method: "credit",  // ?
-        paymentPackageId: packageData._id,
-        paymentSettingsKey: packageData.registry[0].settingsKey,
-        transactionId: Random.id(),
-        currency,
-        amount,
-        status: "passed", // ?
-        mode: "authorize",
-        createdAt: new Date(),
-        transactions: []
-      };
-      Meteor.call("cart/submitPayment", paymentMethod, (submitPaymentError) => {
-        if (submitPaymentError) {
-          Alerts.toast(submitPaymentError.message, "error");
-        } else {
-          deductFromWallet(amount);
-        }
-      });
-    }
+    Meteor.call("accounts/getWalletBalance", (error, result) => {
+      if (amount > result) {
+        Alerts.alert("You do not have enough money to purchase this product.");
+      } else {
+        // Make the payment
+        const paymentMethod = {
+          processor: "Wallet",
+          method: "credit",  // ?
+          paymentPackageId: packageData._id,
+          paymentSettingsKey: packageData.registry[0].settingsKey,
+          transactionId: Random.id(),
+          currency,
+          amount,
+          status: "passed", // ?
+          mode: "authorize",
+          createdAt: new Date(),
+          transactions: []
+        };
+        Meteor.call("cart/submitPayment", paymentMethod, (submitPaymentError) => {
+          if (submitPaymentError) {
+            Alerts.toast(submitPaymentError.message, "error");
+          } else {
+            deductFromWallet(amount);
+          }
+        });
+      }
+    });
   }
 });

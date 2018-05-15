@@ -99,7 +99,7 @@ Template.walletPanel.events({
   "click #fundButton"() {
     const template = Template.instance();
     const amountInput = template.$("#top-up-amount");
-    const amount = amountInput.val();
+    const amount = parseInt(amountInput.val(), 10);
     if (!amount || isNaN(amount)) {
       Alerts.toast("Top-up amount has to be a valid number", "error");
     } else {
