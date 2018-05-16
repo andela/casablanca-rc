@@ -82,15 +82,24 @@ const addToFriendWallet = (amount, email) => {
   const template = Template.instance();
   const amountInput = template.$("#transfer-amount");
   const recipientEmail = template.$("#transfer-email");
-  Meteor.call("accounts/addToFriendWallet", amount, email, function (err, data) {
-    if (!err) {
-      if (!data) {
-        Alerts.toast("Email is invalid. Please try again", "error");
-      } else {
-        Alerts.toast(`Successful transfer of ${amount} to ${email}`);
-        amountInput.val("");
-        recipientEmail.val("");
-      }
+  Alerts.alert({
+    title: `Transfer ₦${amount} from your account?`,
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Continue"
+  }, (isConfirm) => {
+    if (isConfirm) {
+      Meteor.call("accounts/addToFriendWallet", amount, email, function (err, data) {
+        if (!err) {
+          if (!data) {
+            Alerts.toast("Email is invalid. Please try again", "error");
+          } else {
+            Alerts.toast(`Successful transfer of ${amount} to ${email}`);
+            amountInput.val("");
+            recipientEmail.val("");
+          }
+        }
+      });
     }
   });
 };

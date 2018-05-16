@@ -34,27 +34,38 @@ Template.walletPaymentForm.events({
     });
     Meteor.call("accounts/getWalletBalance", (error, result) => {
       if (amount > result) {
+        // Display an error alert
         Alerts.alert("You do not have enough money to purchase this product.");
       } else {
-        // Make the payment
-        const paymentMethod = {
-          processor: "Wallet",
-          method: "credit",  // ?
-          paymentPackageId: packageData._id,
-          paymentSettingsKey: packageData.registry[0].settingsKey,
-          transactionId: Random.id(),
-          currency,
-          amount,
-          status: "passed", // ?
-          mode: "authorize",
-          createdAt: new Date(),
-          transactions: []
-        };
-        Meteor.call("cart/submitPayment", paymentMethod, (submitPaymentError) => {
-          if (submitPaymentError) {
-            Alerts.toast(submitPaymentError.message, "error");
-          } else {
-            deductFromWallet(amount);
+        // Display a warning alert
+        Alerts.alert({
+          title: "Completing this order would deduct from your wallet.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Continue"
+        }, (isConfirm) => {
+          // Make the payment
+          if (isConfirm) {
+            const paymentMethod = {
+              processor: "Wallet",
+              method: "credit",
+              paymentPackageId: packageData._id,
+              paymentSettingsKey: packageData.registry[0].settingsKey,
+              transactionId: Random.id(),
+              currency,
+              amount,
+              status: "passed",
+              mode: "authorize",
+              createdAt: new Date(),
+              transactions: []
+            };
+            Meteor.call("cart/submitPayment", paymentMethod, (submitPaymentError) => {
+              if (submitPaymentError) {
+                Alerts.toast(submitPaymentError.message, "error");
+              } else {
+                deductFromWallet(amount);
+              }
+            });
           }
         });
       }
