@@ -20,6 +20,10 @@ Meteor.methods({
   },
   "shopReviews/average"(revieweeId) {
     check(revieweeId, String);
+    const exists = Reviews.findOne({ revieweeId });
+    if (exists === undefined) {
+      return 0;
+    }
     const result = Reviews.aggregate([
       {
         $match: {

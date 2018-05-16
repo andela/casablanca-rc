@@ -20,7 +20,7 @@ class ShopReviewsList extends Component {
                     <div>
                       <span><ReactStars value={review.rating} edit={false}/></span> <br />
                       {review.review} <br />
-                      <p id="reviewer-details"> By {review.reviewer} on {moment(review.createdAt).format("LL")}</p>
+                      <p id="reviewer-details"> By {review.reviewer} on {moment(review.createdAt).format("h:mm a, MMMM Do YYYY")}</p>
                     </div>
                     <hr />
                   </div>
