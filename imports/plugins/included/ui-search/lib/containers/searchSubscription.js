@@ -34,6 +34,7 @@ function getProductHashtags(productResults) {
 }
 
 function composer(props, onData) {
+  const { sortBy, filterBy } = props;
   const searchResultsSubscription = Meteor.subscribe("SearchResults", props.searchCollection, props.value, props.facets);
   const shopMembersSubscription = Meteor.subscribe("ShopMembers");
 
@@ -47,8 +48,7 @@ function composer(props, onData) {
     * Product Search
     */
     if (props.searchCollection === "products") {
-      productResults = Collections.ProductSearch.find().fetch();
-
+      productResults = Collections.ProductSearch.find(filterBy, { sort: sortBy }).fetch();
       const productHashtags = getProductHashtags(productResults);
       tagSearchResults = Collections.Tags.find({
         _id: { $in: productHashtags }
