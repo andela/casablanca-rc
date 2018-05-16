@@ -25,7 +25,7 @@ class ShopReviewsListContainer extends Component {
 function composer(props, onData) {
   const revieweeId = Reaction.Router.getParam("shopSlug");
   if (Meteor.subscribe("ShopReviews", revieweeId).ready()) {
-    const reviews = Reviews.find({}).fetch();
+    const reviews = Reviews.find({}, { sort: { createdAt: -1 } }).fetch();
     onData(null, { reviews });
   }
 }
