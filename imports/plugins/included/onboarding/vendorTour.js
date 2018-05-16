@@ -2,37 +2,40 @@ const VendorTourGuide = [
   {
     intro: `<h3>Welcome to Reaction Commerce</h3>
       <hr>
-      <div>Here is a quick tour of how to use this application</div>`
+      <div>Here is a quick tour that takes you through this interface.</div>`
   },
   {
     element: ".product-grid",
     intro: `<h3>Products Gallery</h3>
       <hr>
-      <div>This it where you can see all your products and peruse through them</div>`
+      <div>This is where you can see all your products</div>`
   },
   {
     element: ".toolbar-vertical",
     intro: `<h3>Vendor Dashboard</h3>
       <hr>
-      <div>This is were you manage your store, keep up with orders, choose your preferred payment methods</div>`
+      <div>This is where you manage your store, keep up with orders, choose your preferred payment methods</div>`
   },
   {
     element: ".cart-container",
     intro: `<h3> Shopping Cart </h3>
       <hr>
-      <div> A shopping cart contains all the products you selected for purchase. Click on checkout button to proceed to checkout</div>`
+      <div> A shopping cart contains all the products you selected for purchase </div>`
   },
   {
     element: ".accounts",
     intro: `<h3> User Account Options</h3>
       <hr>
-      <div>This is where you can access your account options, such as sign-in and registration and profile management</div>`
+      <div>
+        This is where you can access your account options, manage your profile, view your orders.<br />
+        You can also add new products from here.
+      </div>`
   },
   {
     element: ".currencies",
     intro: `<h3> Currency Options</h3>
       <hr>
-      <div> Select your prefered currency for making payment</div>`
+      <div> You can select your prefered currency for making payments</div>`
   },
   {
     element: ".languages",
@@ -41,10 +44,16 @@ const VendorTourGuide = [
       <div> This is where you can select your prefered language </div>`
   },
   {
+    element: ".notification-icon",
+    intro: `<h3>Notification</h3>
+      <hr>
+      <div>This is where you get your notification on orders</div>`
+  },
+  {
     element: ".search",
     intro: `<h3>Search Products</h3>
       <hr>
-      <div> Here you can search for your desired products by clicking on this icon</div>`
+      <div> You can search for your desired products by clicking on this icon</div>`
   },
   {
     element: "nav.rui",

@@ -92,13 +92,13 @@ class FacebookSocialButton extends Component {
     });
 
     return (
-      <a className="btn btn-flat facebook-share" aria-label="Share to Facebook" href="#" onClick={this.handleClick}
-        target="_blank"
+      <a className="rui btn btn-primary solid icon-only variant-edit" aria-label="Share to Facebook" href="#" onClick={this.handleClick}
+        target="_blank" style={{ backgroundColor: "#3b5998" }}
       >
         <Helmet
           meta={getOpenGraphMeta(this.props)}
         />
-        <i className={iconClassNames} />
+        <i className={iconClassNames}/>
         {this.renderText()}
       </a>
     );

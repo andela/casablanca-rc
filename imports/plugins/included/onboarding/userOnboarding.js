@@ -51,10 +51,10 @@ const steps = [
   {
     element: ".brand",
     intro: `<h2>Our shop</h2>
-    <hr>
-    <div class="tourcontainer">
-      This 
-    </div>`
+      <hr>
+      <div class="tourcontainer">	
+        This link takes you to the products page.
+      </div>`
   },
   {
     element: "#tour-button",
