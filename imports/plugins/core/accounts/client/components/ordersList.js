@@ -12,12 +12,13 @@ import CompletedOrder from "../../../checkout/client/components/completedOrder";
 class OrdersList extends Component {
   static propTypes = {
     allOrdersInfo: PropTypes.array,
+    cancelOrder: PropTypes.func,
     handleDisplayMedia: PropTypes.func,
     isProfilePage: PropTypes.bool
   }
 
   render() {
-    const { allOrdersInfo, handleDisplayMedia } = this.props;
+    const { allOrdersInfo, handleDisplayMedia, cancelOrder } = this.props;
 
     if (allOrdersInfo) {
       return (
@@ -35,6 +36,7 @@ class OrdersList extends Component {
                 productImages={order.productImages}
                 handleDisplayMedia={handleDisplayMedia}
                 isProfilePage={this.props.isProfilePage}
+                cancelOrder={cancelOrder}
               />
             );
           })}

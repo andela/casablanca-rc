@@ -18,7 +18,7 @@ import AddEmail from "./addEmail";
  * @property {Booleam} isProfilePage - A boolean value that checks if current page is user profile page
  * @return {Node} React node containing the top-level component for displaying the completed order/receipt page
  */
-const CompletedOrder = ({ order, orderId, shops, orderSummary, paymentMethods, handleDisplayMedia, isProfilePage }) => {
+const CompletedOrder = ({ order, orderId, shops, orderSummary, paymentMethods, handleDisplayMedia, isProfilePage, cancelOrder }) => {
   if (!order) {
     return (
       <Components.NotFound
@@ -102,6 +102,13 @@ const CompletedOrder = ({ order, orderId, shops, orderSummary, paymentMethods, h
         </div>
         <CompletedOrderSummary shops={shops} orderSummary={orderSummary} isProfilePage={isProfilePage} />
         {/* This is the right side / side content */}
+
+        {
+          isProfilePage && order.workflow.status === "coreOrderWorkflow/canceled" ?
+            <button className="rui btn btn-info" type="button" id="order-canceled-btn" disabled>This order is canceled</button> :
+            <button className="rui btn" type="button" id="cancel-order-btn" onClick={() => cancelOrder(order)}>Cancel Order</button>
+        }
+
       </div>
 
     </div>
@@ -109,6 +116,7 @@ const CompletedOrder = ({ order, orderId, shops, orderSummary, paymentMethods, h
 };
 
 CompletedOrder.propTypes = {
+  cancelOrder: PropTypes.func,
   handleDisplayMedia: PropTypes.func,
   isProfilePage: PropTypes.bool,
   order: PropTypes.object,

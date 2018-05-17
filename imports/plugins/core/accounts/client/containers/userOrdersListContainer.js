@@ -8,6 +8,54 @@ import OrdersList from "../components/ordersList";
 
 const handlers = {};
 
+/* All about canceling order */
+const getOrderStatus = (orderId) => {
+  return new Promise((resolve, reject) => {
+    Meteor.call("orders/getOrderStatus", orderId, (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+};
+
+const confirmCancelOrder = (orderId, successCallback) => {
+  const confirmPopUp = (options) => Alerts.alert({
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Continue",
+    ...options
+  }, (isConfirm) => {
+    if (isConfirm && successCallback) {
+      successCallback();
+    }
+  });
+
+  getOrderStatus(orderId).then((orderStatus) => {
+    if (orderStatus === "new") {
+      confirmPopUp({ title: "The admin is yet to process this order. You can get a full refund." });
+    } else if (orderStatus === "coreOrderWorkflow/processing") {
+      confirmPopUp({ title: "The admin has started processing this order but you can still get a full refund." });
+    } else if (orderStatus === "coreOrderWorkflow/completed") {
+      confirmPopUp({ title: "This order is already shipped. You would be charged for tax and shipping fee." });
+    } else if (orderStatus === "coreOrderWorkflow/canceled") {
+      confirmPopUp({ title: "This order has been canceled.", showCancelButton: true, showConfirmButton: false, cancelButtonText: "OK" });
+    }
+  });
+};
+
+const cancelOrder = (order) => {
+  confirmCancelOrder(order._id, () => {
+    Meteor.call("orders/cancelOrder", order, true);
+  });
+};
+
+handlers.cancelOrder = cancelOrder;
+
+/* All about canceling order */
+
 handlers.handleDisplayMedia = (item) => {
   const variantId = item.variants._id;
   const productId = item.productId;
