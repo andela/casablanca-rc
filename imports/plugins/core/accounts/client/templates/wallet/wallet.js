@@ -85,7 +85,7 @@ const addToFriendWallet = (amount, email) => {
   Meteor.call("accounts/addToFriendWallet", amount, email, function (err, data) {
     if (!err) {
       if (!data) {
-        Alerts.toast("Email is invalid. Please try again", "error");
+        Alerts.toast("Email not found. Please try again", "error");
       } else {
         Alerts.toast(`Successful transfer of ${amount} to ${email}`);
         amountInput.val("");
@@ -118,8 +118,12 @@ Template.walletPanel.events({
     const recipientEmail = template.$("#transfer-email");
     const amount = amountInput.val();
     const email = recipientEmail.val();
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const validEmail =  regex.test(String(email).toLowerCase());
     if (!amount || isNaN(amount) || parseInt(amount, 10) < 0) {
       Alerts.toast("Top-up amount has to be a valid number", "error");
+    } else if (!validEmail) {
+      Alerts.toast("The email you entered is invalid. Please try again", "error");
     } else if (Reaction.Subscriptions && Reaction.Subscriptions.Account && Reaction.Subscriptions.Account.ready()) {
       const account = getTargetAccount();
       let balance = 0;

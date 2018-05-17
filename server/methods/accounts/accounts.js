@@ -1026,6 +1026,8 @@ export function createFallbackLoginToken() {
  * @returns boolean
  */
 const validAmountCheck = Match.Where((amount) => !isNaN(amount) && amount > 0);
+const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const validEmailCheck = Match.Where((email) => regex.test(String(email).toLowerCase()));
 
 
 /**
@@ -1087,7 +1089,7 @@ export const deductFromWallet = (amount) => {
 
 export const addToFriendWallet = (amount, email) => {
   check(amount, validAmountCheck);
-  check(email, String);
+  check(email, validEmailCheck);
   const user = Meteor.user();
   const recipient = Accounts.findOne({ emails: { $elemMatch: { address: email } } });
   if (recipient === undefined) {
