@@ -44,3 +44,9 @@
   padding: 10px 0px;
   text-decoration: underline;
 }
+
+.reviews-list-vertical {
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}

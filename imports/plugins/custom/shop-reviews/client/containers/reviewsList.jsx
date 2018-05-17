@@ -18,7 +18,9 @@ class ShopReviewsListContainer extends Component {
       );
     }
     return (
-      <Components.ShopReviewsList reviews={reviews} />
+      <div className="reviews-list-vertical">
+        <Components.ShopReviewsList reviews={reviews} />
+      </div>
     );
   }
 }
