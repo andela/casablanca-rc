@@ -96,7 +96,9 @@ class ReviewsContainer extends Component {
         />
         <div>
           <h1 className="padding-twenty reviews-heading">All reviews</h1>
-          <ReviewsList reviews={this.props.reviews}/>
+          <div className="reviews-list-vertical">
+            <ReviewsList reviews={this.props.reviews}/>
+          </div>
         </div>
       </div>
     );
