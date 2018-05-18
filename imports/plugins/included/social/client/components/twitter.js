@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
+import ReactTooltip from "react-tooltip";
 import classnames from "classnames";
 import { Translation } from "/imports/plugins/core/ui/client/components";
 
@@ -78,9 +79,11 @@ class TwitterSocialButton extends Component {
     });
 
     return (
-      <a className="rui btn btn-primary solid icon-only variant-edit" aria-label="Share to Twitter" href="#" onClick={this.handleClick}
+      <a className="rui btn btn-primary solid icon-only variant-edit" data-tip="Share product to Twitter" aria-label="Share to Twitter" href="#"
+        onClick={this.handleClick}
         target="_blank" style={{ marginLeft: "5px", backgroundColor: "#1DA1F2" }}
       >
+        <ReactTooltip />
         <Helmet
           meta={getTwitterMeta(this.props)}
         />
