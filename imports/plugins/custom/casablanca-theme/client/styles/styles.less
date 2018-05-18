@@ -134,9 +134,13 @@
     background-color: @casablanca-orange;
     border: lighten(@casablanca-orange, 25%);
     outline: none;
+    max-width: 50%;
   }
   button:hover {
     background-color: darken(@casablanca-orange, 5%);
+  }
+  &.block {
+    justify-content: center;
   }
 }
 
@@ -191,3 +195,25 @@
 }
 
 /* All about Wallet */
+
+
+/* Orders list */
+
+.user-orders-list {
+  .order-completed {
+    padding-bottom: 25px;
+  }
+  #cancel-order-btn {
+    margin-top: 15px;
+    background-color: white;
+    color: black;
+    border: 1px solid grey;
+    &:hover, &:active, &:focus {
+      background-color: #e6e6e6;
+    }
+  }
+  #order-canceled-btn {
+    margin-top: 15px;
+  }
+}
+/* Orders list */

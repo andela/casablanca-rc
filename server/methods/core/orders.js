@@ -128,6 +128,23 @@ export function orderQuantityAdjust(orderId, refundedItem) {
  * Reaction Order Methods
  */
 export const methods = {
+
+  /**
+   * orders/getOrderStatus
+   *
+   * @summary fetch the status of an order
+   * @param {String} orderID - The ID of the order
+   * @return {String} The status of the order
+   */
+  "orders/getOrderStatus": function (orderID) {
+    check(orderID, String);
+    const result = Orders.findOne({
+      _id: orderID,
+      userId: Meteor.userId()
+    });
+    return result.workflow.status;
+  },
+
   /**
    * orders/shipmentPicked
    *
@@ -316,7 +333,7 @@ export const methods = {
 
   /**
    * orders/cancelOrder
-   *
+   * This method has been modified to allow users also canel their orders.
    * @summary Start the cancel order process
    * @param {Object} order - order object
    * @param {Boolean} returnToStock - condition to return product to stock
@@ -325,12 +342,6 @@ export const methods = {
   "orders/cancelOrder": function (order, returnToStock) {
     check(order, Object);
     check(returnToStock, Boolean);
-
-    // REVIEW: Only marketplace admins should be able to cancel entire order?
-    // Unless order is entirely contained in a single shop? Do we need a switch on marketplace owner dashboard?
-    if (!Reaction.hasPermission("orders")) {
-      throw new Meteor.Error("access-denied", "Access Denied");
-    }
 
     if (!returnToStock) {
       ordersInventoryAdjust(order._id);
@@ -348,7 +359,18 @@ export const methods = {
     });
 
     // refund payment to customer
-    Meteor.call("orders/refunds/create", order._id, paymentMethod, Number(invoiceTotal));
+    if (paymentMethod.processor === "Wallet") {
+      if (order.workflow.status === "coreOrderWorkflow/completed") {
+        // If the product is already shipped, deduct tax and shipping fee before refunding.
+        const refundAmount = Number(invoiceTotal) - Number(billingRecord.invoice.taxes) - Number(billingRecord.invoice.shipping);
+        Meteor.call("accounts/addToWallet", Math.round(refundAmount), order.userId);
+      } else {
+        const refundAmount = Number(invoiceTotal);
+        Meteor.call("accounts/addToWallet", Math.round(refundAmount), order.userId);
+      }
+    } else {
+      Meteor.call("orders/refunds/create", order._id, paymentMethod, Number(invoiceTotal));
+    }
 
     // send notification to user
     const prefix = Reaction.getShopPrefix();

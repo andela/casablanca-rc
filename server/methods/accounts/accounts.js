@@ -1049,11 +1049,11 @@ export const getWalletBalance = () => {
  * @summary Adds more fund to the wallet.
  * @returns {Boolean} - returns boolean.
  */
-export const addToWallet = (amount) => {
+export const addToWallet = (amount, userId) => {
   check(amount, validAmountCheck);
   const user = Meteor.user();
   Accounts.update({
-    _id: user._id
+    _id: userId || user._id
   }, {
     $inc: {
       walletBalance: amount
