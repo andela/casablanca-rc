@@ -1,6 +1,7 @@
 /* eslint camelcase: 0 */
 import { Meteor } from "meteor/meteor";
 import { Template } from "meteor/templating";
+import { ReactiveVar } from "meteor/reactive-var";
 import { AutoForm } from "meteor/aldeed:autoform";
 import { $ } from "meteor/jquery";
 import { getCardType } from "/client/modules/core/helpers/globals";
@@ -72,6 +73,16 @@ function validCVV(x) {
 Template.stripePaymentForm.helpers({
   StripePayment() {
     return StripePayment;
+  },
+
+  formVisibility() {
+    return Template.instance().formVisibility.get();
+  }
+});
+
+Template.stripePaymentForm.events({
+  "click #toggleForm": (event, template) => {
+    template.formVisibility.set(!template.formVisibility.get());
   }
 });
 
@@ -91,6 +102,7 @@ Template.stripePaymentForm.onCreated(function () {
       }
     }
   });
+  this.formVisibility = new ReactiveVar(false);
 });
 
 //

@@ -1,5 +1,6 @@
 /* eslint camelcase: 0 */
 import { Meteor } from "meteor/meteor";
+import { ReactiveVar } from "meteor/reactive-var";
 import { $ } from "meteor/jquery";
 import { Template } from "meteor/templating";
 import { Reaction, Logger } from "/client/api";
@@ -35,9 +36,23 @@ function handleAuthNetSubmitError(error) {
 // used to track asynchronous submitting for UI changes
 let submitting = false;
 
+Template.authnetPaymentForm.onCreated(function () {
+  this.formVisibility = new ReactiveVar(false);
+});
+
 Template.authnetPaymentForm.helpers({
   AuthNetPayment() {
     return AuthNetPayment;
+  },
+
+  formVisibility() {
+    return Template.instance().formVisibility.get();
+  }
+});
+
+Template.authnetPaymentForm.events({
+  "click #toggleForm": (event, template) => {
+    template.formVisibility.set(!template.formVisibility.get());
   }
 });
 
