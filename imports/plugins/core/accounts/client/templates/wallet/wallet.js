@@ -85,7 +85,7 @@ const addToFriendWallet = (amount, email) => {
   Meteor.call("accounts/addToFriendWallet", amount, email, function (err, data) {
     if (!err) {
       if (!data) {
-        Alerts.toast("Email not found. Please try again", "error");
+        Alerts.toast("User with this email does not exist. Please try again", "error");
       } else {
         Alerts.toast(`Successful transfer of ${amount} to ${email}`);
         amountInput.val("");
