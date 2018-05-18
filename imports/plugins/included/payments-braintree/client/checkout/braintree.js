@@ -1,6 +1,7 @@
 /* eslint camelcase: 0 */
 import { Meteor } from "meteor/meteor";
 import { Template } from "meteor/templating";
+import { ReactiveVar } from "meteor/reactive-var";
 import { AutoForm } from "meteor/aldeed:autoform";
 import { $ } from "meteor/jquery";
 import { getCardType } from "/client/modules/core/helpers/globals";
@@ -11,9 +12,23 @@ import { BraintreePayment } from "../../lib/collections/schemas";
 
 import "./braintree.html";
 
+Template.braintreePaymentForm.onCreated(function () {
+  this.formVisibility = new ReactiveVar(false);
+});
+
 Template.braintreePaymentForm.helpers({
   BraintreePayment() {
     return BraintreePayment;
+  },
+
+  formVisibility() {
+    return Template.instance().formVisibility.get();
+  }
+});
+
+Template.braintreePaymentForm.events({
+  "click #toggleForm": (event, template) => {
+    template.formVisibility.set(!template.formVisibility.get());
   }
 });
 

@@ -1,6 +1,7 @@
 /* eslint camelcase: 0 */
 import { Meteor } from "meteor/meteor";
 import { Random } from "meteor/random";
+import { ReactiveVar } from "meteor/reactive-var";
 import { Template } from "meteor/templating";
 import { Reaction } from "/client/api";
 import { Cart, Shops, Packages } from "/lib/collections";
@@ -16,9 +17,17 @@ const deductFromWallet = (amount) => {
   Meteor.call("accounts/deductFromWallet", amount);
 };
 
+Template.walletPaymentForm.onCreated(function () {
+  this.formVisibility = new ReactiveVar(false);
+});
+
 Template.walletPaymentForm.helpers({
   totalPrice() {
     return Cart.findOne().getTotal();
+  },
+
+  formVisibility() {
+    return Template.instance().formVisibility.get();
   }
 });
 
@@ -70,5 +79,9 @@ Template.walletPaymentForm.events({
         });
       }
     });
+  },
+
+  "click #toggleForm": (event, template) => {
+    template.formVisibility.set(!template.formVisibility.get());
   }
 });

@@ -1,6 +1,7 @@
 /* eslint camelcase: 0 */
 import { Meteor } from "meteor/meteor";
 import { Template } from "meteor/templating";
+import { ReactiveVar } from "meteor/reactive-var";
 import { AutoForm } from "meteor/aldeed:autoform";
 import { $ } from "meteor/jquery";
 import { Reaction } from "/client/api";
@@ -37,9 +38,23 @@ function handlePaystackSubmitError(error) {
 }
 
 
+Template.paystackPaymentForm.onCreated(function () {
+  this.formVisibility = new ReactiveVar(false);
+});
+
 Template.paystackPaymentForm.helpers({
   PaystackPayment() {
     return PaystackPayment;
+  },
+
+  formVisibility() {
+    return Template.instance().formVisibility.get();
+  }
+});
+
+Template.paystackPaymentForm.events({
+  "click #toggleForm": (event, template) => {
+    template.formVisibility.set(!template.formVisibility.get());
   }
 });
 

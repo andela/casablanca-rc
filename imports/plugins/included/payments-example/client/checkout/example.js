@@ -1,6 +1,7 @@
 /* eslint camelcase: 0 */
 import { Meteor } from "meteor/meteor";
 import { Template } from "meteor/templating";
+import { ReactiveVar } from "meteor/reactive-var";
 import { AutoForm } from "meteor/aldeed:autoform";
 import { $ } from "meteor/jquery";
 import { Reaction } from "/client/api";
@@ -36,9 +37,24 @@ function handleExampleSubmitError(error) {
 }
 
 
+Template.examplePaymentForm.onCreated(function () {
+  this.formVisibility = new ReactiveVar(false);
+});
+
 Template.examplePaymentForm.helpers({
   ExamplePayment() {
     return ExamplePayment;
+  },
+
+  formVisibility() {
+    return Template.instance().formVisibility.get();
+  }
+});
+
+
+Template.examplePaymentForm.events({
+  "click #toggleForm": (event, template) => {
+    template.formVisibility.set(!template.formVisibility.get());
   }
 });
 
