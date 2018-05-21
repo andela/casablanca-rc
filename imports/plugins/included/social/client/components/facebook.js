@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import classnames from "classnames";
+import ReactTooltip from "react-tooltip";
 import { $ } from "meteor/jquery";
 import { Translation } from "/imports/plugins/core/ui/client/components";
 
@@ -92,9 +93,11 @@ class FacebookSocialButton extends Component {
     });
 
     return (
-      <a className="rui btn btn-primary solid icon-only variant-edit" aria-label="Share to Facebook" href="#" onClick={this.handleClick}
+      <a className="rui btn btn-primary solid icon-only variant-edit" data-tip="Share product to Facebook" aria-label="Share to Facebook" href="#"
+        onClick={this.handleClick}
         target="_blank" style={{ backgroundColor: "#3b5998" }}
       >
+        <ReactTooltip />
         <Helmet
           meta={getOpenGraphMeta(this.props)}
         />
