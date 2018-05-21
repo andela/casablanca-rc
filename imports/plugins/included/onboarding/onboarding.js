@@ -13,16 +13,15 @@ userIntro.setOptions({
 });
 
 const initAutoTour = () => {
-  const user = Collections.Accounts.find({ userId: Meteor.userId() }).fetch();
+  const user = Collections.Accounts.findOne({ userId: Meteor.userId() });
   if (Meteor.user().emails.length === 0) {
-    if (localStorage.getItem("takenTour") === false) {
+    if (!localStorage.getItem("takenTour")) {
       setTimeout(() => {
         userIntro.start();
       }, 5000);
       localStorage.setItem("takenTour", true);
     }
-  }
-  if (user.hasTakenTour === false) {
+  } else if (user.hasTakenTour === false && !localStorage.getItem("takenTour")) {
     setTimeout(() => {
       userIntro.start();
     }, 5000);
@@ -30,6 +29,9 @@ const initAutoTour = () => {
       { $set: { hasTakenTour: true } }
     );
   }
+  Collections.Accounts.update(user._id,
+    { $set: { hasTakenTour: true } }
+  );
 };
 
 

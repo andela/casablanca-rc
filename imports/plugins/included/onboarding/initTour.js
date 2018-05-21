@@ -14,8 +14,8 @@ intro.setOptions({
 });
 
 const initAutoTour = () => {
-  const isVendor = Reaction.hasPermission("admin");
-  const user = Collections.Accounts.find({ userId: Meteor.userId() }).fetch();
+  const isVendor = Reaction.hasPermission("seller") || Reaction.hasPermission("owner");
+  const user = Collections.Accounts.findOne({ userId: Meteor.userId() });
   if (user.hasTakenTour === false && isVendor) {
     intro.start();
     Collections.Accounts.update(user._id,
