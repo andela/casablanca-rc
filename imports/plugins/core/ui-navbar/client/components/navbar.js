@@ -173,6 +173,12 @@ class NavBar extends Component {
     tourSetup.initManualTour();
   }
 
+  renderStaticPages() {
+    return (
+      <Components.StaticPagesComponent />
+    );
+  }
+
   render() {
     // console.log(this.props, 'no props here ')
     return (
@@ -184,6 +190,7 @@ class NavBar extends Component {
         {this.renderTourButton()}
         {this.renderNotificationIcon()}
         {this.renderOnboardingButton()}
+        {this.renderStaticPages()}
         {this.renderLanguage()}
         {this.renderCurrency()}
         {this.renderMainDropdown()}
