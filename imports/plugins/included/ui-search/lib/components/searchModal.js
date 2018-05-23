@@ -174,6 +174,7 @@ class SearchModal extends Component {
                             count={5}
                             size={20}
                             color1={"#ffd700"}
+                            color2={"#ff5700"}
                           />
                         </a>
                       </span>
@@ -186,6 +187,7 @@ class SearchModal extends Component {
                             count={4}
                             size={20}
                             color1={"#ffd700"}
+                            color2={"#ff5700"}
                           />
                         </a>
                       </span>
@@ -197,6 +199,7 @@ class SearchModal extends Component {
                             count={3}
                             size={20}
                             color1={"#ffd700"}
+                            color2={"#ff5700"}
                           />
                         </a>
                       </span>
@@ -208,6 +211,7 @@ class SearchModal extends Component {
                             count={2}
                             size={20}
                             color1={"#ffd700"}
+                            color2={"#ff5700"}
                           />
                         </a>
                       </span>
@@ -219,6 +223,7 @@ class SearchModal extends Component {
                             count={1}
                             size={20}
                             color1={"#ffd700"}
+                            color2={"#ff5700"}
                           />
                         </a>
                       </span>
