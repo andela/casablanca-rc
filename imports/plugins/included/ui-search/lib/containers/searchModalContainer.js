@@ -20,7 +20,9 @@ const wrapComponent = (Comp) => (
         collection: "products",
         value: localStorage.getItem("searchValue") || "",
         renderChild: true,
-        facets: []
+        facets: [],
+        filterBy: {},
+        sortBy: {}
       };
     }
 
@@ -74,21 +76,62 @@ const wrapComponent = (Comp) => (
       this.setState({ renderChild: false });
     }
 
+    handleVendorChange = (vendor) => {
+      if (vendor === "all") {
+        this.setState({ filterBy: {} });
+      }
+      this.setState({  filterBy: { vendor } });
+    }
+
+    handlePriceChange = (price) => {
+      const [lowerPriceRange, upperPriceRange] = price.split("-");
+      if (lowerPriceRange === "all") {
+        this.setState({  filterBy: {} });
+      } else {
+        this.setState({
+          filterBy: {
+            $and: [{
+              "price.min": { $gte: parseInt(lowerPriceRange, 10) },
+              "price.max": { $lte: parseInt(upperPriceRange, 10) }
+            }]
+          }
+        });
+      }
+    }
+
+    handleSortChange = (value) => {
+      if (value === "NEW") {
+        this.setState({ sortBy: { createdAt: -1 } });
+      } else if (value === "OLD") {
+        this.setState({ sortBy: { createdAt: 1 } });
+      } else if (value === "POPULAR") {
+        this.setState({ sortBy: { quantitySold: -1 } });
+      } else {
+        this.setState({ sortBy: {} });
+      }
+    }
+
     render() {
       return (
         <div>
           {this.state.renderChild ?
             <div className="rui search-modal js-search-modal">
               <Comp
+                handleBestSellerClick={this.handleBestSellerClick}
                 handleChange={this.handleChange}
                 handleClick={this.handleClick}
+                handlePriceChange={this.handlePriceChange}
+                handleSortChange={this.handleSortChange}
                 handleToggle={this.handleToggle}
+                handleVendorChange={this.handleVendorChange}
                 handleAccountClick={this.handleAccountClick}
                 handleTagClick={this.handleTagClick}
                 value={this.state.value}
                 unmountMe={this.handleChildUnmount}
                 searchCollection={this.state.collection}
                 facets={this.state.facets}
+                filterBy={this.state.filterBy}
+                sortBy={this.state.sortBy}
               />
             </div> : null
           }
