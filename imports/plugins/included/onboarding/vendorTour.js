@@ -68,6 +68,14 @@ const VendorTourGuide = [
       <div> Toggle between edit and view mode to make and view changes to your shop</div>`
   },
   {
+    element: ".takeTour",
+    intro: `<h2>Tour Button</h2>
+    <hr>
+    <div class="tourcontainer">	
+      You can always take this tour again at anytime by clicking this button.
+    </div>`
+  },
+  {
     intro: `<h3>End of Tour</h3>
       <hr>
       <div>Now you are ready. You can start uploading your products and attending to orders</div>`

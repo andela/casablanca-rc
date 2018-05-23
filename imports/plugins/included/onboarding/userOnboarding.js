@@ -57,6 +57,14 @@ const steps = [
       </div>`
   },
   {
+    element: ".takeTour",
+    intro: `<h2>Tour Button</h2>
+    <hr>
+    <div class="tourcontainer">	
+      You can always take this tour again at anytime by clicking this button.
+    </div>`
+  },
+  {
     element: "#tour-button",
     intro: `<h2>Tour</h2>
     <hr>

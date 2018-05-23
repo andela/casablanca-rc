@@ -95,11 +95,11 @@ class NavBar extends Component {
   }
 
   renderOnboardingButton() {
-    if (!Reaction.hasPermission("admin")) {
+    if (!Reaction.hasPermission("admin") && window.location.pathname.indexOf("/tag/") === 0) {
       return (
-        <div className="search">
+        <div className="takeTour search">
           <button onClick={this.startOnboarding} className="rui btn btn-default flat button" type="button" kind="flat">
-            Start Onboard
+            Take A Tour
           </button></div>
       );
     }
@@ -107,7 +107,7 @@ class NavBar extends Component {
 
   startOnboarding(e) {
     e.preventDefault();
-    onboarding();
+    onboarding.initManualTour();
   }
 
   renderNotificationIcon() {
@@ -119,11 +119,11 @@ class NavBar extends Component {
   }
 
   renderTourButton() {
-    if (Reaction.hasPermission("admin") && window.location.pathname !== "/") {
+    if ((Reaction.hasPermission("seller") || (Reaction.hasPermission("owner"))) && window.location.pathname.indexOf("/tag/") === 0) {
       return (
-        <div className="search">
+        <div className="takeTour search">
           <button onClick={this.startTour} className="rui btn btn-default flat button" type="button" kind="flat">
-            Take Tour
+            Take A Tour
           </button>
         </div>
       );
