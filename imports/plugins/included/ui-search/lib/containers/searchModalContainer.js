@@ -111,6 +111,19 @@ const wrapComponent = (Comp) => (
       }
     }
 
+    handleRatingChange = (rating) => {
+      const [lowerRate, upperRate] = rating.split("-");
+      this.setState({
+        filterBy: {
+          $and: [{
+            averageRating: { $gte: parseInt(lowerRate, 10) }
+          },
+          { averageRating: { $lte: parseInt(upperRate, 10) }
+          }]
+        }
+      });
+    }
+
     render() {
       return (
         <div>
@@ -125,6 +138,7 @@ const wrapComponent = (Comp) => (
                 handleToggle={this.handleToggle}
                 handleVendorChange={this.handleVendorChange}
                 handleAccountClick={this.handleAccountClick}
+                handleRatingChange={this.handleRatingChange}
                 handleTagClick={this.handleTagClick}
                 value={this.state.value}
                 unmountMe={this.handleChildUnmount}
