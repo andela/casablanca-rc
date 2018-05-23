@@ -32,6 +32,10 @@ const wrapComponent = (Comp) => (
       return false;
     }
 
+    isDigitalProduct = () => {
+      return this.props.product.isDigital;
+    }
+
     isSoldOut = () => {
       const topVariants = ReactionProduct.getTopVariants(this.props.product._id);
 
@@ -55,6 +59,7 @@ const wrapComponent = (Comp) => (
           isLowQuantity={this.isLowQuantity}
           isSoldOut={this.isSoldOut}
           isBackorder={this.isBackorder}
+          isDigital={this.isDigitalProduct}
         />
       );
     }

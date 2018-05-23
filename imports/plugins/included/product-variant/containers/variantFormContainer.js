@@ -100,6 +100,11 @@ const wrapComponent = (Comp) => (
       return false;
     }
 
+    selectedProduct = () => {
+      // console.log(ReactionProduct.selectedProduct());
+      return ReactionProduct.selectedProduct();
+    }
+
     greyDisabledFields = (variant) => {
       if (this.hasChildVariants(variant)) {
         return { backgroundColor: "lightgrey", cursor: "not-allowed" };
@@ -261,6 +266,7 @@ const wrapComponent = (Comp) => (
             isDeleted={this.state.isDeleted}
             {...this.props}
             variant={this.props.variant}
+            currentProduct={this.selectedProduct()}
           />
         );
       }
