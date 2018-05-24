@@ -1,20 +1,20 @@
 import { Reaction } from "/server/api";
 
 Reaction.registerPackage({
-  label: "Stats",
-  name: "Stats",
+  label: "Analysis",
+  name: "Analysis",
   icon: "fa fa-bar-chart",
   autoEnable: true,
   settings: {
-    name: "Stats"
+    name: "Analysis"
   },
   registry: [
     {
       route: "/dashboard/analytics",
       provides: "dashboard",
-      name: "Stats",
-      label: "Stats",
-      description: "View Stats",
+      name: "Analytics",
+      label: "Analytics",
+      description: "View Analysis",
       icon: "fa fa-bar-chart",
       priority: 1,
       container: "core",

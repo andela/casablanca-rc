@@ -15,6 +15,7 @@ const getOrderStatus = (orderId) => {
       if (err) {
         reject(err);
       } else {
+        console.log("======results from get orders", result);
         resolve(result);
       }
     });
