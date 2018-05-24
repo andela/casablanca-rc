@@ -42,5 +42,16 @@ Meteor.methods({
   "review/product"(productId) {
     check(productId, String);
     return Products.findOne({ handle: productId });
+  },
+  "product/average"(revieweeId, average) {
+    check(revieweeId, String);
+    check(average, Number);
+    const result = Products.findOne({ handle: revieweeId });
+    if (result) {
+      const _id = result._id;
+      const averageRating = average;
+      const productUpdate = Object.assign({}, result, { averageRating });
+      Products.upsert({ _id }, { $set: productUpdate });
+    }
   }
 });

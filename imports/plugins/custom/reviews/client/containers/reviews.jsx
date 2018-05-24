@@ -66,6 +66,7 @@ class ReviewsContainer extends Component {
     Meteor.call("reviews/average", revieweeId, function (err, data) {
       if (!err) {
         Session.set("averageRating", data);
+        Meteor.call("product/average", revieweeId, data);
       }
     });
     this.clearFields();
@@ -80,7 +81,6 @@ class ReviewsContainer extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <ReviewsPresentational

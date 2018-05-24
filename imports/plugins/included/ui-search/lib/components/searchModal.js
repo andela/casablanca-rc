@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactStars from "react-stars";
 import PropTypes from "prop-types";
 import { Reaction } from "/client/api";
 import { TextField, Button, IconButton, SortableTableLegacy } from "@reactioncommerce/reaction-ui";
@@ -12,6 +13,7 @@ class SearchModal extends Component {
     handleChange: PropTypes.func,
     handleClick: PropTypes.func,
     handlePriceChange: PropTypes.func,
+    handleRatingChange: PropTypes.func,
     handleSortChange: PropTypes.func,
     handleTagClick: PropTypes.func,
     handleToggle: PropTypes.func,
@@ -159,6 +161,73 @@ class SearchModal extends Component {
                           value="POPULAR"
                         >BestSeller</option>
                       </select>
+                    </div>
+                  </div>
+                  <div className="sort-div">
+                    <label>Filter by Ratings</label>
+                    <div className="container">
+                      <span>
+                        <a
+                          onClick={() => this.props.handleRatingChange("4-5")}
+                        >
+                          <ReactStars
+                            count={5}
+                            size={20}
+                            color1={"#ffd700"}
+                            color2={"#ff5700"}
+                          />
+                        </a>
+                      </span>
+
+                      <span>
+                        <a
+                          onClick={() => this.props.handleRatingChange("3-4")}
+                        >
+                          <ReactStars
+                            count={4}
+                            size={20}
+                            color1={"#ffd700"}
+                            color2={"#ff5700"}
+                          />
+                        </a>
+                      </span>
+                      <span>
+                        <a
+                          onClick={() => this.props.handleRatingChange("2-3")}
+                        >
+                          <ReactStars
+                            count={3}
+                            size={20}
+                            color1={"#ffd700"}
+                            color2={"#ff5700"}
+                          />
+                        </a>
+                      </span>
+                      <span>
+                        <a
+                          onClick={() => this.props.handleRatingChange("1-2")}
+                        >
+                          <ReactStars
+                            count={2}
+                            size={20}
+                            color1={"#ffd700"}
+                            color2={"#ff5700"}
+                          />
+                        </a>
+                      </span>
+                      <span>
+                        <a
+                          onClick={() => this.props.handleRatingChange("0-1")}
+                        >
+                          <ReactStars
+                            count={1}
+                            size={20}
+                            color1={"#ffd700"}
+                            color2={"#ff5700"}
+                          />
+                        </a>
+                      </span>
+
                     </div>
                   </div>
                   <div className="filter">
