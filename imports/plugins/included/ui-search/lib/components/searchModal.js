@@ -41,6 +41,7 @@ class SearchModal extends Component {
           i18nKeyLabel="search.clearSearch"
           label="Clear"
           containerStyle={{ fontWeight: "normal" }}
+          style={{ top: 29 }}
           onClick={this.props.handleClick}
         />
       </div>
@@ -138,7 +139,7 @@ class SearchModal extends Component {
               <div id="sort">
                 <div className="container sort-filter">
                   <div className="sort-div">
-                    <label>Sort by New Arrivals</label>
+                    <label className="sort-size">Sort by New Arrivals</label>
                     <div className="rui select">
                       <select
                         id="sort-value"
@@ -151,7 +152,7 @@ class SearchModal extends Component {
                     </div>
                   </div>
                   <div className="sort-div">
-                    <label>Sort by BestSellers</label>
+                    <label className="sort-size">Sort by BestSellers</label>
                     <div className="rui select">
                       <select
                         id="sort-value"
@@ -164,7 +165,7 @@ class SearchModal extends Component {
                     </div>
                   </div>
                   <div className="sort-div">
-                    <label>Filter by Ratings</label>
+                    <label className="sort-size">Filter by Ratings</label>
                     <div className="container">
                       <span>
                         <a
@@ -178,7 +179,6 @@ class SearchModal extends Component {
                           />
                         </a>
                       </span>
-
                       <span>
                         <a
                           onClick={() => this.props.handleRatingChange("3-4")}
@@ -231,7 +231,7 @@ class SearchModal extends Component {
                     </div>
                   </div>
                   <div className="filter">
-                    <label className="transform">Filter by Price</label>
+                    <label className="sort-size">Filter by Price</label>
                     <div className="rui select">
                       <select
                         id="price-filter"
@@ -247,7 +247,7 @@ class SearchModal extends Component {
                     </div>
                   </div>
                   <div className="sort-div">
-                    <label>Filter by Vendor </label>
+                    <label className="sort-size">Filter by Vendor </label>
                     {this.renderVendor()}
                   </div>
                 </div>
