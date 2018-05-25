@@ -212,17 +212,66 @@
   .order-completed {
     padding-bottom: 25px;
   }
-  #cancel-order-btn {
-    margin-top: 15px;
-    background-color: white;
-    color: black;
-    border: 1px solid grey;
-    &:hover, &:active, &:focus {
-      background-color: #e6e6e6;
+  .order-status-info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .order-status-text {
+      margin-top: 15px;
+      background-color: white;
+      color: black;
+      border: 1px solid #ccc;
+      height: 40px;
+      font-size: 14px;
+      text-align: center;
+      padding: 7px;
     }
-  }
-  #order-canceled-btn {
-    margin-top: 15px;
+    .order-status-dot {
+      height: 10px;
+      width: 10px;
+      background-color: @casablanca-blue;
+      border-radius: 50%;
+      display: inline-block;
+      &.order-new {
+        background-color: grey;
+      }
+      &.order-processed {
+        background-color: @casablanca-orange;
+      }
+      &.order-shipped {
+        background-color: @casablanca-blue
+      }
+      &.order-canceled {
+        background-color: red;
+      }
+    }
+    .cancel-order-btn {
+      margin-top: 15px;
+      background-color: white;
+      color: black;
+      border: 1px solid @casablanca-blue;
+      &:hover, &:active, &:focus {
+        background-color: #e6e6e6;
+      }
+    }
   }
 }
 /* Orders list */
+
+/* Customizing sweet alert modal */
+div.swal2-container {
+  .swal2-modal .swal2-title {
+    font-size: 22px;
+  }
+}
+/* Customizing sweet alert modal */
+
+
+.core-payment-methods .core-payment-method-form {
+  .row:first-child {
+    padding-left: 5px;
+  }
+  #toggleForm {
+    margin-bottom: 10px;
+  }
+}
