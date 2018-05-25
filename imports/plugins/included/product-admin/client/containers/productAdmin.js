@@ -143,6 +143,11 @@ function composer(props, onData) {
 
     const countries = Countries.find({}).fetch();
 
+    const productTypes = [
+      { value: true, label: "Digital Products" },
+      { value: false, label: "NonDigital Products" }
+    ];
+
     onData(null, {
       editFocus: Reaction.state.get("edit/focus") || "productDetails",
       product: product,
@@ -150,6 +155,7 @@ function composer(props, onData) {
       tags,
       revisonDocumentIds,
       templates,
+      productTypes,
       countries,
       editable
     });

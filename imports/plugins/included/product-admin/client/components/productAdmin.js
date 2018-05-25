@@ -144,6 +144,8 @@ class ProductAdmin extends Component {
   handleSelectChange = (value, field) => {
     if (this.props.onProductFieldSave) {
       this.props.onProductFieldSave(this.product._id, field, value);
+    } else if (field === "isDigital") {
+      this.props.onProductFieldSave(this.product._id, "requiresShipping", false);
     }
   }
 
@@ -244,6 +246,16 @@ class ProductAdmin extends Component {
               placeholder="Select a template"
               value={this.product.template}
             />
+
+            <Components.Select
+              clearable={false}
+              label="Product Type"
+              name= "isDigital"
+              onChange={this.handleSelectChange}
+              value={this.product.isDigital}
+              options={this.props.productTypes}
+            />
+
             <Components.TextField
               i18nKeyLabel="productDetailEdit.title"
               i18nKeyPlaceholder="productDetailEdit.title"
@@ -441,6 +453,7 @@ ProductAdmin.propTypes = {
   onProductFieldSave: PropTypes.func,
   onRestoreProduct: PropTypes.func,
   product: PropTypes.object,
+  productTypes: PropTypes.array,
   revisonDocumentIds: PropTypes.arrayOf(PropTypes.string),
   templates: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string,
