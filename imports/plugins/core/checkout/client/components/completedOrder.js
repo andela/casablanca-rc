@@ -46,9 +46,28 @@ const CompletedOrder = ({ order, orderId, shops, orderSummary, paymentMethods, h
     );
   }
 
+  const getOrderStatus = (theOrder) => {
+    const workflowStatus = theOrder.workflow.status;
+    const status = { text: null, color: "grey" };
+    if (workflowStatus === "new") {
+      status.text = "This order has not been processed";
+      status.color = "order-new";
+    } else if (workflowStatus === "coreOrderWorkflow/processing") {
+      status.text = "This order is being processed";
+      status.color = "order-processed";
+    } else if (workflowStatus === "coreOrderWorkflow/completed") {
+      status.text = "This order is already shipped";
+      status.color = "order-shipped";
+    } else if (workflowStatus === "coreOrderWorkflow/canceled") {
+      status.text = "This order is canceled";
+      status.color = "order-canceled";
+    }
+    return status;
+  };
+
   return (
     <div className="container order-completed">
-      { headerText }
+      {headerText}
       <div className="order-details-main">
         <div className="order-details-content-title">
           <p><Components.Translation defaultValue="Your Items" i18nKey={"cartCompleted.yourItems"} /></p>
@@ -81,8 +100,8 @@ const CompletedOrder = ({ order, orderId, shops, orderSummary, paymentMethods, h
                 return <div className="order-details-info-box" key={shipment._id}>
                   <div className="order-details-info-box-content">
                     <p>
-                      {shipment.address.fullName}<br/>
-                      {shipment.address.address1}<br/>
+                      {shipment.address.fullName}<br />
+                      {shipment.address.address1}<br />
                       {shipment.address.city}, {shipment.address.region} {shipment.address.postal} {shipment.address.country}
                     </p>
                   </div>
@@ -102,13 +121,20 @@ const CompletedOrder = ({ order, orderId, shops, orderSummary, paymentMethods, h
         </div>
         <CompletedOrderSummary shops={shops} orderSummary={orderSummary} isProfilePage={isProfilePage} />
         {/* This is the right side / side content */}
-
-        {
-          isProfilePage && order.workflow.status === "coreOrderWorkflow/canceled" ?
-            <button className="rui btn btn-info" type="button" id="order-canceled-btn" disabled>This order is canceled</button> :
-            <button className="rui btn" type="button" id="cancel-order-btn" onClick={() => cancelOrder(order)}>Cancel Order</button>
-        }
-
+        <div className="order-status-info">
+          {
+            isProfilePage ?
+              <p className="rui order-status-text">
+                <span className={`order-status-dot ${getOrderStatus(order).color}`} />&nbsp;&nbsp;{getOrderStatus(order).text}
+              </p> :
+              null
+          }
+          {
+            isProfilePage && order.workflow.status !== "coreOrderWorkflow/canceled" ?
+              <button className="rui btn cancel-order-btn" type="button" onClick={() => cancelOrder(order)}>Cancel Order</button> :
+              null
+          }
+        </div>
       </div>
 
     </div>
