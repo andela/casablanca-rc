@@ -34,7 +34,6 @@ const initAutoTour = () => {
   );
 };
 
-
 const initManualTour = () => {
   userIntro.start();
 };

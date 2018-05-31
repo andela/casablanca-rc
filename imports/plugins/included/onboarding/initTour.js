@@ -17,7 +17,9 @@ const initAutoTour = () => {
   const isVendor = Reaction.hasPermission("seller") || Reaction.hasPermission("owner");
   const user = Collections.Accounts.findOne({ userId: Meteor.userId() });
   if (user.hasTakenTour === false && isVendor) {
-    intro.start();
+    setTimeout(() => {
+      intro.start();
+    }, 3000);
     Collections.Accounts.update(user._id,
       { $set: { hasTakenTour: true } }
     );
